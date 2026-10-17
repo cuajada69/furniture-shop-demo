@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>__BRAND__ · Tienda</title>
+<meta name="description" content="__TAGLINE__">
+<meta name="theme-color" content="#1c1b19">
+<style>
+/*FONTS*/
+:root{
+  --bg:#f5f3ef; --card:#fff; --tx:#1c1b19; --mut:#6f6a61; --line:#e6e1d8; --soft:#efebe4;
+  --dark:#1c1b19; --gold:#b08d3c; --gold-2:#d7b968; --wa:#25d366; --wa-d:#128c4b;
+  --r:18px; --sh:0 1px 2px rgba(28,27,25,.05),0 8px 24px rgba(28,27,25,.06);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--tx);font:400 14px/1.5 Montserrat,system-ui,sans-serif}
+img{display:block;max-width:100%}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+a{color:inherit}
+.wrap{max-width:1240px;margin:0 auto;padding:0 16px}
+
+/* ---------- Portada ---------- */
+.hero{position:relative;height:230px;background:#2a2824 url(img/f/__PORTADA__) center 42%/cover;overflow:hidden}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05) 40%,rgba(0,0,0,.35))}
+.hero .tools{position:absolute;top:14px;right:16px;display:flex;gap:8px;z-index:2}
+.icon-btn{width:42px;height:42px;border-radius:50%;background:#fff;display:grid;place-items:center;box-shadow:0 2px 10px rgba(0,0,0,.18);position:relative}
+.icon-btn svg{width:20px;height:20px}
+.badge-n{position:absolute;top:-4px;right:-4px;min-width:20px;height:20px;padding:0 5px;border-radius:10px;background:var(--gold);color:#fff;font:700 11px/20px Montserrat;text-align:center}
+.badge-n:empty,.badge-n[data-n="0"]{display:none}
+.search{position:absolute;top:14px;left:16px;right:120px;z-index:2;display:none}
+.search.on{display:block}
+.search input{width:100%;height:42px;border-radius:21px;border:0;padding:0 18px;font:500 14px Montserrat;box-shadow:0 2px 10px rgba(0,0,0,.18);outline:none}
+
+/* ---------- Tienda ---------- */
+.shop{background:#fff;border-bottom:1px solid var(--line)}
+.head{display:flex;gap:16px;align-items:flex-end;position:relative;z-index:1;padding-top:12px}
+.head .logo{margin-top:-58px}
+.logo{width:104px;height:104px;border-radius:50%;background:var(--dark);border:4px solid #fff;box-shadow:var(--sh);display:grid;place-items:center;flex:none}
+.logo span{font:600 50px/1 "Cormorant Garamond",serif;color:var(--gold-2);margin-top:-6px}
+.logo small{display:block;font:600 7.5px/1 Montserrat;letter-spacing:2.5px;color:#e9e4da;text-align:center;margin-top:-2px}
+.head h1{margin:0 0 6px;font:700 22px/1.2 Montserrat;letter-spacing:-.2px}
+.pill{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:99px;padding:3px 12px 3px 8px;font-size:12px;font-weight:500;text-decoration:none;background:#fff}
+.pill i{width:9px;height:9px;border-radius:50%;background:var(--wa);box-shadow:0 0 0 3px rgba(37,211,102,.18)}
+.pills{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px}
+.about{color:var(--mut);font-size:13px;margin:12px 0 4px;max-width:820px}
+
+/* Categorías (carrusel de círculos) */
+.cats-box{position:relative;margin-top:10px}
+.cats{display:flex;gap:6px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:10px 2px 6px}
+.cats::-webkit-scrollbar{display:none}
+.cat{flex:none;width:112px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;scroll-snap-align:start;text-align:center;font-size:11.5px;font-weight:500;color:var(--mut);text-transform:uppercase;letter-spacing:.3px;line-height:1.3}
+.cat .c-img{width:76px;height:76px;margin:0 auto 8px;border-radius:50%;padding:3px;border:2px solid transparent;transition:.2s}
+.cat .c-img img,.cat .c-img div{width:100%;height:100%;border-radius:50%;object-fit:cover}
+.cat .c-img div{background:var(--dark);display:grid;place-items:center;color:var(--gold-2);font:600 13px Montserrat;letter-spacing:1px}
+.cat:hover .c-img{border-color:var(--line)}
+.cat.on{color:var(--tx);font-weight:700}
+.cat.on .c-img{border-color:var(--gold)}
+.arrow{position:absolute;top:34px;width:34px;height:34px;border-radius:50%;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.16);display:grid;place-items:center;z-index:2}
+.arrow.l{left:-6px}.arrow.r{right:-6px}
+.arrow svg{width:16px;height:16px}
+.arrow[hidden]{display:none}
+
+/* Chips */
+.chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:8px 0 16px;justify-content:center}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;padding:7px 16px;border-radius:99px;background:var(--soft);font-size:12.5px;font-weight:500;transition:.15s}
+.chip.on{background:var(--dark);color:#fff}
+
+/* ---------- Grilla ---------- */
+main{padding:22px 0 40px}
+.tit{display:flex;justify-content:space-between;align-items:baseline;margin:0 0 14px;gap:12px}
+.tit h2{margin:0;font:700 17px Montserrat;text-transform:uppercase;letter-spacing:.6px}
+.tit span{color:var(--mut);font-size:12.5px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.card{background:var(--card);border-radius:var(--r);box-shadow:var(--sh);padding:12px;display:flex;flex-direction:column;animation:in .35s ease both}
+@keyframes in{from{opacity:0;transform:translateY(8px)}}
+.media{position:relative;border-radius:12px;overflow:hidden;background:var(--soft);aspect-ratio:1}
+.slides{display:flex;height:100%;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
+.slides::-webkit-scrollbar{display:none}
+.slides img{flex:none;width:100%;height:100%;object-fit:cover;scroll-snap-align:start;cursor:pointer}
+.dots{position:absolute;bottom:8px;left:0;right:0;display:flex;justify-content:center;gap:4px;pointer-events:none}
+.dots i{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.6);box-shadow:0 0 2px rgba(0,0,0,.3);transition:.2s}
+.dots i.on{background:#fff;width:14px;border-radius:3px}
+.add{position:absolute;top:8px;right:8px;width:34px;height:34px;border-radius:50%;background:#fff;box-shadow:0 1px 6px rgba(0,0,0,.18);display:grid;place-items:center;transition:.2s;z-index:1}
+.add svg{width:16px;height:16px}
+.add.in{background:var(--dark);color:#fff}
+.tag{position:absolute;top:50px;right:8px;background:var(--dark);color:#fff;font:600 10.5px Montserrat;padding:4px 9px;border-radius:99px}
+.tag.g{background:var(--gold)}
+.card h3{margin:12px 2px 2px;font:500 13px/1.35 Montserrat;text-transform:uppercase;letter-spacing:.3px}
+.cat-l{margin:0 2px;color:var(--mut);font-size:11.5px}
+.price{margin:6px 2px 10px;font:600 15px Montserrat}
+.price.q{font-size:13px;color:var(--wa-d);display:flex;align-items:center;gap:5px}
+.price.q svg{width:15px;height:15px}
+.det{margin-top:auto;border:1px solid var(--line);border-radius:99px;padding:8px;font-size:12.5px;font-weight:500;text-align:center;transition:.15s;background:#fff}
+.det:hover{background:var(--dark);color:#fff;border-color:var(--dark)}
+.more{display:block;margin:30px auto 0;background:var(--dark);color:#fff;font:600 14px Montserrat;padding:13px 30px;border-radius:99px}
+.more[hidden]{display:none}
+.empty{text-align:center;color:var(--mut);padding:50px 0}
+
+/* ---------- Footer ---------- */
+footer{background:var(--dark);color:#d9d4ca;padding:34px 0 90px;font-size:13px}
+footer .f{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:28px}
+footer h4{margin:0 0 10px;color:var(--gold-2);font:600 12px Montserrat;letter-spacing:2px;text-transform:uppercase}
+footer a{display:block;text-decoration:none;color:#d9d4ca;margin:5px 0}
+footer a:hover{color:#fff}
+footer .brand{font:600 30px "Cormorant Garamond",serif;color:#fff;margin-bottom:6px}
+footer .legal{border-top:1px solid #34312c;margin-top:26px;padding-top:16px;color:#8d877c;font-size:11.5px;text-align:center}
+
+/* ---------- Flotantes ---------- */
+.fab{position:fixed;right:18px;bottom:22px;width:60px;height:60px;border-radius:50%;background:var(--wa);color:#fff;display:grid;place-items:center;box-shadow:0 6px 20px rgba(37,211,102,.45);z-index:30;text-decoration:none;animation:pulse 2.6s infinite}
+.fab svg{width:32px;height:32px}
+@keyframes pulse{0%,100%{box-shadow:0 6px 20px rgba(37,211,102,.45),0 0 0 0 rgba(37,211,102,.5)}50%{box-shadow:0 6px 20px rgba(37,211,102,.45),0 0 0 12px rgba(37,211,102,0)}}
+.listbar{position:fixed;left:50%;bottom:22px;transform:translate(-50%,140%);background:var(--dark);color:#fff;border-radius:99px;padding:8px 8px 8px 20px;display:flex;align-items:center;gap:14px;box-shadow:0 10px 30px rgba(0,0,0,.3);z-index:29;transition:.35s cubic-bezier(.2,.8,.2,1);font-weight:500;white-space:nowrap}
+.listbar:not(.on){visibility:hidden;opacity:0}
+.listbar.on{transform:translate(-50%,0)}
+.listbar button{background:var(--gold);color:#fff;border-radius:99px;padding:9px 16px;font-weight:600;font-size:13px}
+.toast{position:fixed;left:50%;top:18px;transform:translate(-50%,-150%);background:var(--dark);color:#fff;padding:10px 18px;border-radius:99px;font-size:13px;font-weight:500;z-index:60;transition:.3s;box-shadow:0 6px 20px rgba(0,0,0,.25)}
+.toast.on{transform:translate(-50%,0)}
+
+/* ---------- Detalle de producto ---------- */
+.ov{position:fixed;inset:0;background:rgba(20,19,17,.55);z-index:40;opacity:0;pointer-events:none;transition:.25s;backdrop-filter:blur(2px)}
+.ov.on{opacity:1;pointer-events:auto}
+.modal{position:fixed;inset:0;z-index:41;display:grid;place-items:center;padding:24px;pointer-events:none}
+.sheet{background:#fff;border-radius:22px;width:min(1000px,100%);max-height:calc(100vh - 48px);overflow:auto;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);opacity:0;transform:translateY(20px) scale(.98);transition:.28s;pointer-events:none;position:relative}
+.modal.on .sheet{opacity:1;transform:none;pointer-events:auto}
+.x{position:absolute;top:12px;right:12px;width:38px;height:38px;border-radius:50%;background:#fff;box-shadow:0 1px 6px rgba(0,0,0,.18);display:grid;place-items:center;z-index:3}
+.x svg{width:18px;height:18px}
+.gal{padding:16px;background:var(--soft)}
+.gal .big{border-radius:14px;overflow:hidden;aspect-ratio:1;background:#e7e2d9;position:relative}
+.gal .big img{width:100%;height:100%;object-fit:cover;cursor:zoom-in}
+.gal .nav{position:absolute;top:50%;transform:translateY(-50%);width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.92);display:grid;place-items:center}
+.gal .nav.l{left:10px}.gal .nav.r{right:10px}
+.gal .nav svg{width:16px;height:16px}
+.thumbs{display:flex;gap:8px;margin-top:10px;overflow-x:auto}
+.thumbs img{width:72px;height:72px;border-radius:10px;object-fit:cover;opacity:.55;cursor:pointer;border:2px solid transparent;flex:none}
+.thumbs img.on{opacity:1;border-color:var(--gold)}
+.info{padding:30px 28px 26px;display:flex;flex-direction:column}
+.crumb{font-size:11.5px;color:var(--mut);text-transform:uppercase;letter-spacing:1px}
+.info h2{margin:6px 0 4px;font:700 26px/1.15 Montserrat}
+.info .price{margin:8px 0 14px;font-size:15px}
+.info p{color:#46423c;margin:0 0 14px}
+.feat{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
+.feat span{background:var(--soft);border-radius:99px;padding:5px 12px;font-size:12px;font-weight:500}
+.ask{border:1px dashed var(--line);border-radius:14px;padding:12px 14px;font-size:12.5px;color:var(--mut);margin-bottom:18px}
+.ask b{color:var(--tx)}
+.qty{display:flex;align-items:center;border:1px solid var(--line);border-radius:99px;width:max-content;margin-bottom:12px}
+.qty button{width:38px;height:38px;font-size:18px}
+.qty span{min-width:26px;text-align:center;font-weight:600}
+.btn-wa{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--wa);color:#fff;border-radius:99px;padding:13px;font:600 14.5px Montserrat;text-decoration:none;margin-bottom:8px}
+.btn-wa:hover{background:#1fb959}
+.btn-wa svg{width:20px;height:20px}
+.btn-line{border:1.5px solid var(--dark);border-radius:99px;padding:12px;font:600 14px Montserrat;width:100%}
+.btn-line.in{background:var(--dark);color:#fff}
+.rel{grid-column:1/-1;padding:4px 22px 24px}
+.rel h4{margin:14px 0 10px;font:600 13px Montserrat;text-transform:uppercase;letter-spacing:.6px}
+.rel .row{display:flex;gap:12px;overflow-x:auto;padding-bottom:4px}
+.rel .mini{flex:none;width:150px;cursor:pointer}
+.rel .mini img{width:150px;height:150px;border-radius:12px;object-fit:cover}
+.rel .mini span{display:block;font-size:12px;font-weight:500;margin-top:6px;text-transform:uppercase}
+
+/* ---------- Lista de cotización (carrito) ---------- */
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(420px,100%);background:#fff;z-index:42;transform:translateX(105%);transition:.3s cubic-bezier(.2,.8,.2,1);display:flex;flex-direction:column;box-shadow:-10px 0 40px rgba(0,0,0,.15)}
+.drawer.on{transform:none}
+.dh{display:flex;justify-content:space-between;align-items:center;padding:18px 20px;border-bottom:1px solid var(--line)}
+.dh h3{margin:0;font:700 17px Montserrat}
+.dh small{display:block;color:var(--mut);font-size:12px;font-weight:400}
+.items{flex:1;overflow:auto;padding:8px 20px}
+.it{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);align-items:center}
+.it img{width:70px;height:70px;border-radius:10px;object-fit:cover}
+.it .n{flex:1;font-size:13px;font-weight:600;text-transform:uppercase}
+.it .n small{display:block;font-weight:400;color:var(--mut);text-transform:none}
+.it .qty{margin:6px 0 0}.it .qty button{width:30px;height:30px;font-size:15px}
+.rm{color:var(--mut);font-size:12px;text-decoration:underline}
+.df{padding:16px 20px 22px;border-top:1px solid var(--line)}
+.df label{font-size:12px;font-weight:600;color:var(--mut);display:block;margin-bottom:6px}
+.df input{width:100%;border:1px solid var(--line);border-radius:12px;padding:11px 14px;font:500 14px Montserrat;margin-bottom:12px;outline:none}
+.df input:focus{border-color:var(--gold)}
+.vacio{text-align:center;color:var(--mut);padding:60px 10px}
+.vacio svg{width:46px;height:46px;opacity:.4;margin-bottom:8px}
+
+/* Visor a pantalla completa */
+.zoom{position:fixed;inset:0;background:rgba(10,10,10,.94);z-index:70;display:none;place-items:center;cursor:zoom-out}
+.zoom.on{display:grid}
+.zoom img{max-width:96vw;max-height:94vh;border-radius:6px}
+
+/* ---------- Responsive ---------- */
+@media (max-width:1024px){.grid{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:760px){
+  .hero{height:170px}
+  .head{gap:12px;padding-top:10px}.head .logo{margin-top:-48px}
+  .logo{width:84px;height:84px}.logo span{font-size:40px}.logo small{font-size:6px;letter-spacing:2px}
+  .head h1{font-size:18px}
+  .grid{grid-template-columns:repeat(2,1fr);gap:10px}
+  .card{padding:8px;border-radius:14px}
+  .card h3{font-size:11.5px;margin-top:9px}
+  .price.q{font-size:11.5px}
+  .det{font-size:11.5px;padding:7px}
+  .add{width:30px;height:30px}
+  .tag{top:44px;font-size:9.5px}
+  .chips{justify-content:flex-start}
+  .cat{width:92px;font-size:10.5px}.cat .c-img{width:68px;height:68px}
+  .arrow{display:none}
+  .modal{padding:0;place-items:end center}
+  .sheet{grid-template-columns:minmax(0,1fr);border-radius:22px 22px 0 0;max-height:94vh;transform:translateY(40px)}
+  .info{padding:20px 18px}
+  .info h2{font-size:21px}
+  .rel{padding:0 18px 22px}
+  footer .f{grid-template-columns:1fr;gap:20px}
+  .listbar{bottom:96px}
+}
+</style>
+</head>
+<body>
+
+<header class="hero" id="top">
+  <div class="search" id="search"><input id="q" type="search" placeholder="Buscar: cama, comedor redondo, en L, terciopelo…" autocomplete="off"></div>
+  <div class="tools">
+    <button class="icon-btn" id="bSearch" aria-label="Buscar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
+    <button class="icon-btn" id="bList" aria-label="Mi lista"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l-1 13H7L6 7Z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg><span class="badge-n" id="nList" data-n="0">0</span></button>
+  </div>
+</header>
+
+<section class="shop">
+  <div class="wrap">
+    <div class="head">
+      <div class="logo"><div><span>__INITIAL__</span><small>__SHORT__</small></div></div>
+      <div>
+        <h1>__BRAND__</h1>
+        <div class="pills">
+          <a class="pill" id="pillWa" target="_blank" rel="noopener"><i></i>Tienda WhatsApp</a>
+          <a class="pill" id="pillIg" target="_blank" rel="noopener">Instagram</a>
+        </div>
+      </div>
+    </div>
+    <p class="about">__ABOUT__</p>
+    <div class="cats-box">
+      <button class="arrow l" id="aL" aria-label="Anterior" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m15 18-6-6 6-6"/></svg></button>
+      <div class="cats" id="cats"></div>
+      <button class="arrow r" id="aR" aria-label="Siguiente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg></button>
+    </div>
+    <div class="chips" id="chips"></div>
+  </div>
+</section>
+
+<main class="wrap">
+  <div class="tit"><h2 id="titulo">Todo</h2><span id="cuenta"></span></div>
+  <div class="grid" id="grid"></div>
+  <p class="empty" id="empty" hidden>No encontramos muebles con esa búsqueda. Escríbenos y te ayudamos a encontrarlo.</p>
+  <button class="more" id="more">Cargar más productos</button>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="f">
+      <div><div class="brand">__BRAND__</div>__TAGLINE__</div>
+      <div><h4>Colecciones</h4><div id="fCols"></div></div>
+      <div><h4>Contacto</h4><div id="fRedes"></div></div>
+    </div>
+    <div class="legal">© <span id="year"></span> __BRAND__ · Las fotos son de referencia; acabados y medidas se confirman con un asesor.</div>
+  </div>
+</footer>
+
+<a class="fab" id="fab" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 32 32" fill="currentColor"><path d="M16.04 3C9 3 3.3 8.7 3.3 15.74c0 2.25.6 4.45 1.72 6.38L3.2 28.8l6.85-1.8a12.7 12.7 0 0 0 6 1.53h.01c7.03 0 12.74-5.7 12.74-12.74C28.8 8.7 23.08 3 16.04 3Zm0 23.36h-.01a10.6 10.6 0 0 1-5.4-1.48l-.39-.23-4.07 1.07 1.09-3.97-.25-.4a10.58 10.58 0 0 1-1.62-5.6c0-5.85 4.76-10.61 10.62-10.61a10.6 10.6 0 0 1 10.6 10.62c0 5.85-4.76 10.6-10.57 10.6Zm5.82-7.94c-.32-.16-1.88-.93-2.17-1.04-.29-.1-.5-.16-.71.16-.21.32-.82 1.04-1 1.25-.19.21-.37.24-.69.08-.32-.16-1.34-.5-2.56-1.58a9.6 9.6 0 0 1-1.77-2.2c-.19-.32-.02-.49.14-.65.14-.14.32-.37.48-.56.16-.19.21-.32.32-.53.1-.21.05-.4-.03-.56-.08-.16-.71-1.71-.98-2.35-.26-.62-.52-.53-.71-.54h-.61c-.21 0-.56.08-.85.4-.29.32-1.11 1.09-1.11 2.65s1.14 3.08 1.3 3.29c.16.21 2.24 3.42 5.43 4.8.76.33 1.35.52 1.81.67.76.24 1.45.2 2 .12.61-.09 1.88-.77 2.14-1.51.27-.74.27-1.38.19-1.51-.08-.13-.29-.21-.61-.37Z"/></svg></a>
+
+<div class="listbar" id="listbar"><span id="lbTxt"></span><button id="lbBtn">Ver mi lista</button></div>
+<div class="toast" id="toast"></div>
+
+<div class="ov" id="ov"></div>
+<div class="modal" id="modal"><div class="sheet" id="sheet"></div></div>
+
+<aside class="drawer" id="drawer" aria-label="Mi lista de cotización">
+  <div class="dh"><h3>Mi lista<small>Envíala por WhatsApp y un asesor te cotiza</small></h3><button class="x" style="position:static" id="dClose" aria-label="Cerrar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+  <div class="items" id="items"></div>
+  <div class="df" id="dFoot">
+    <label for="nom">Tu nombre</label><input id="nom" placeholder="Ej: Laura Gómez" autocomplete="name">
+    <label for="ciu">Ciudad de entrega</label><input id="ciu" placeholder="Ej: Bogotá" autocomplete="address-level2">
+    <a class="btn-wa" id="send" target="_blank" rel="noopener"><svg viewBox="0 0 32 32" fill="currentColor"><use href="#wa"/></svg>Enviar lista por WhatsApp</a>
+  </div>
+</aside>
+
+<div class="zoom" id="zoom"><img alt=""></div>
+<svg width="0" height="0" style="position:absolute"><symbol id="wa" viewBox="0 0 32 32"><path d="M16.04 3C9 3 3.3 8.7 3.3 15.74c0 2.25.6 4.45 1.72 6.38L3.2 28.8l6.85-1.8a12.7 12.7 0 0 0 6 1.53h.01c7.03 0 12.74-5.7 12.74-12.74C28.8 8.7 23.08 3 16.04 3Zm5.82 15.42c-.32-.16-1.88-.93-2.17-1.04-.29-.1-.5-.16-.71.16-.21.32-.82 1.04-1 1.25-.19.21-.37.24-.69.08-.32-.16-1.34-.5-2.56-1.58a9.6 9.6 0 0 1-1.77-2.2c-.19-.32-.02-.49.14-.65.14-.14.32-.37.48-.56.16-.19.21-.32.32-.53.1-.21.05-.4-.03-.56-.08-.16-.71-1.71-.98-2.35-.26-.62-.52-.53-.71-.54h-.61c-.21 0-.56.08-.85.4-.29.32-1.11 1.09-1.11 2.65s1.14 3.08 1.3 3.29c.16.21 2.24 3.42 5.43 4.8.76.33 1.35.52 1.81.67.76.24 1.45.2 2 .12.61-.09 1.88-.77 2.14-1.51.27-.74.27-1.38.19-1.51-.08-.13-.29-.21-.61-.37Z"/></symbol></svg>
+
+<script>
+/*DATA*/
+const $=s=>document.querySelector(s), esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const P=DATA.productos, byId=Object.fromEntries(P.map(p=>[p.id,p])), colName=Object.fromEntries(DATA.cols.map(c=>[c.id,c.nombre]));
+const wa=t=>`https://api.whatsapp.com/send?phone=${DATA.wa}&text=${encodeURIComponent(t)}`;
+const cop=n=>"COP "+n.toLocaleString("es-CO");
+const ICO={plus:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>',
+ check:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>',
+ wa:'<svg viewBox="0 0 32 32" fill="currentColor"><use href="#wa"/></svg>',
+ x:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>',
+ l:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m15 18-6-6 6-6"/></svg>',
+ r:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>'};
+const precioHTML=p=>p.precio?`<div class="price">${cop(p.precio)}</div>`:`<div class="price q">${ICO.wa}Cotiza por WhatsApp</div>`;
+
+// ---------- Estado ----------
+let col="todo", chip="Todo", q="", shown=12;
+let list={}; try{list=JSON.parse(localStorage.getItem(DATA.storeKey)||"{}")}catch{}
+const save=()=>{try{localStorage.setItem(DATA.storeKey,JSON.stringify(list))}catch{}};
+
+// ---------- Encabezado ----------
+$("#pillWa").href=wa(`Hola ${DATA.marca}, vi su tienda en línea y quisiera más información.`);
+$("#fab").href=$("#pillWa").href;
+$("#pillIg").href=DATA.redes.instagram.url;
+$("#year").textContent=new Date().getFullYear();
+$("#fCols").innerHTML=DATA.cols.map(c=>`<a href="#" data-col="${c.id}">${esc(c.nombre)}</a>`).join("");
+$("#fRedes").innerHTML=`<a href="${wa("Hola, quisiera información.")}" target="_blank" rel="noopener">WhatsApp ${esc(DATA.waVisible)}</a>`+
+ ["instagram","facebook","ubicacion","linktree"].map(k=>`<a href="${DATA.redes[k].url}" target="_blank" rel="noopener">${esc(k==="instagram"?"Instagram "+DATA.redes[k].texto:k==="facebook"?"Facebook":DATA.redes[k].texto)}</a>`).join("");
+
+// ---------- Categorías ----------
+const cats=$("#cats");
+cats.innerHTML=`<button class="cat on" data-col="todo"><div class="c-img"><div>TODO</div></div>Todo</button>`+
+ DATA.cols.map(c=>`<button class="cat" data-col="${c.id}"><div class="c-img"><img src="img/g/${c.img}" alt=""></div>${esc(c.nombre)}</button>`).join("");
+const arrows=()=>{$("#aL").hidden=cats.scrollLeft<8;$("#aR").hidden=cats.scrollLeft+cats.clientWidth>=cats.scrollWidth-8};
+cats.addEventListener("scroll",arrows);addEventListener("resize",arrows);arrows();
+$("#aL").onclick=()=>cats.scrollBy({left:-300,behavior:"smooth"});
+$("#aR").onclick=()=>cats.scrollBy({left:300,behavior:"smooth"});
+document.addEventListener("click",e=>{const b=e.target.closest("[data-col]");if(!b)return;e.preventDefault();setCol(b.dataset.col);if(b.closest("footer"))scrollTo({top:$(".shop").offsetTop,behavior:"smooth"})});
+
+function setCol(c){col=c;chip="Todo";shown=12;
+ document.querySelectorAll(".cat").forEach(b=>b.classList.toggle("on",b.dataset.col===c));
+ const chips=c==="todo"?DATA.cols.map(x=>x.nombre):(DATA.cols.find(x=>x.id===c).chips);
+ $("#chips").innerHTML=["Todo",...chips].map(t=>`<button class="chip${t==="Todo"?" on":""}">${esc(t)}</button>`).join("");
+ render();}
+$("#chips").onclick=e=>{const b=e.target.closest(".chip");if(!b)return;
+ if(col==="todo"&&b.textContent!=="Todo"){setCol(DATA.cols.find(x=>x.nombre===b.textContent).id);return}
+ chip=b.textContent;shown=12;document.querySelectorAll(".chip").forEach(x=>x.classList.toggle("on",x===b));render()};
+
+// ---------- Grilla ----------
+const norm=s=>s.normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase();
+function filtrados(){const t=norm(q).split(/\s+/).filter(Boolean);
+ return P.filter(p=>(col==="todo"||p.col===col)&&(chip==="Todo"||p.tags.includes(chip))&&
+  t.every(w=>norm(`${p.nombre} ${colName[p.col]} ${p.desc} ${p.tags.join(" ")}`).includes(w)))}
+function card(p){const inL=!!list[p.id];
+ return `<article class="card" data-id="${p.id}">
+  <div class="media">
+   <div class="slides">${p.fotos.map((f,i)=>`<img src="img/g/${f}" alt="${esc(p.nombre)} foto ${i+1}" loading="lazy" data-open>`).join("")}</div>
+   <div class="dots">${p.fotos.map((_,i)=>`<i class="${i?"":"on"}"></i>`).join("")}</div>
+   <button class="add${inL?" in":""}" data-add aria-label="Agregar a mi lista">${inL?ICO.check:ICO.plus}</button>
+   ${p.armado?'<span class="tag g">Fotos de armado</span>':p.badge?`<span class="tag">${esc(p.badge)}</span>`:""}
+  </div>
+  <h3>${esc(p.nombre)}</h3><div class="cat-l">${esc(p.tags[0]||colName[p.col])}</div>
+  ${precioHTML(p)}
+  <button class="det" data-open>Ver Detalles</button>
+ </article>`}
+function render(){const L=filtrados();
+ $("#titulo").textContent=q?`Resultados para "${q}"`:col==="todo"?"Todos los muebles":colName[col]+(chip!=="Todo"?" · "+chip:"");
+ $("#cuenta").textContent=`${L.length} referencia${L.length===1?"":"s"}`;
+ $("#grid").innerHTML=L.slice(0,shown).map(card).join("");
+ $("#empty").hidden=L.length>0;$("#more").hidden=shown>=L.length;
+ document.querySelectorAll(".slides").forEach(s=>s.addEventListener("scroll",()=>{const i=Math.round(s.scrollLeft/s.clientWidth);
+  s.nextElementSibling.querySelectorAll("i").forEach((d,k)=>d.classList.toggle("on",k===i))},{passive:true}))}
+$("#more").onclick=()=>{shown+=12;render()};
+$("#grid").onclick=e=>{const c=e.target.closest(".card");if(!c)return;
+ if(e.target.closest("[data-add]")){toggle(c.dataset.id);return}
+ if(e.target.closest("[data-open]"))abrir(c.dataset.id)};
+
+// Búsqueda
+$("#bSearch").onclick=()=>{const s=$("#search");s.classList.toggle("on");if(s.classList.contains("on"))$("#q").focus();else{$("#q").value="";q="";render()}};
+$("#q").oninput=e=>{q=e.target.value.trim();shown=12;render()};
+
+// ---------- Lista de cotización ----------
+const count=()=>Object.values(list).reduce((a,b)=>a+b,0);
+function toast(t){const el=$("#toast");el.textContent=t;el.classList.add("on");clearTimeout(toast.t);toast.t=setTimeout(()=>el.classList.remove("on"),1800)}
+function toggle(id){if(list[id]){delete list[id];toast("Quitado de tu lista")}else{list[id]=1;toast("✓ Agregado a tu lista")}sync()}
+function sync(){save();const n=count();$("#nList").textContent=n;$("#nList").dataset.n=n;
+ $("#listbar").classList.toggle("on",n>0&&!$("#drawer").classList.contains("on"));
+ $("#lbTxt").textContent=`${n} mueble${n===1?"":"s"} en tu lista`;
+ document.querySelectorAll(".card").forEach(c=>{const b=c.querySelector("[data-add]"),i=!!list[c.dataset.id];b.classList.toggle("in",i);b.innerHTML=i?ICO.check:ICO.plus});
+ const ids=Object.keys(list);
+ $("#items").innerHTML=ids.length?ids.map(id=>{const p=byId[id];return `<div class="it" data-id="${id}"><img src="img/g/${p.fotos[0]}" alt=""><div class="n">${esc(p.nombre)}<small>${esc(colName[p.col])}</small>
+  <div class="qty"><button data-q="-1">−</button><span>${list[id]}</span><button data-q="1">+</button></div></div><button class="rm" data-rm>Quitar</button></div>`}).join("")
+  :`<div class="vacio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 7h12l-1 13H7L6 7Z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg><br>Tu lista está vacía.<br>Toca <b>+</b> en los muebles que te gusten.</div>`;
+ $("#dFoot").style.display=ids.length?"":"none";
+ const m=$("#sheet [data-addm]");if(m){const i=!!list[m.dataset.addm];m.classList.toggle("in",i);m.textContent=i?"✓ En tu lista":"Agregar a mi lista"}
+ linkEnvio()}
+function linkEnvio(){const ids=Object.keys(list),nom=$("#nom").value.trim(),ciu=$("#ciu").value.trim();
+ const t=`Hola ${DATA.marca}${nom?", soy "+nom:""}. Quiero cotizar estos muebles de la tienda en línea:\n\n`+
+  ids.map(id=>`• ${list[id]} x ${byId[id].nombre}`).join("\n")+(ciu?`\n\nCiudad de entrega: ${ciu}`:"")+`\n\n¿Me confirman precio, medidas y disponibilidad?`;
+ $("#send").href=wa(t)}
+$("#nom").oninput=$("#ciu").oninput=linkEnvio;
+$("#items").onclick=e=>{const it=e.target.closest(".it");if(!it)return;const id=it.dataset.id;
+ if(e.target.closest("[data-rm]"))delete list[id];
+ const d=e.target.closest("[data-q]");if(d){list[id]+=+d.dataset.q;if(list[id]<1)delete list[id]}sync()};
+const openDrawer=()=>{cerrar();$("#drawer").classList.add("on");$("#ov").classList.add("on");sync()};
+const closeDrawer=()=>{$("#drawer").classList.remove("on");$("#ov").classList.remove("on");sync()};
+$("#bList").onclick=$("#lbBtn").onclick=openDrawer;$("#dClose").onclick=closeDrawer;
+
+// ---------- Detalle ----------
+let cur=null,idx=0;
+function abrir(id){const p=byId[id];cur=p;idx=0;const inL=!!list[id];
+ const rel=P.filter(x=>x.col===p.col&&x.id!==id).slice(0,8);
+ $("#sheet").innerHTML=`<button class="x" data-x aria-label="Cerrar">${ICO.x}</button>
+ <div class="gal"><div class="big"><img id="big" src="img/f/${p.fotos[0]}" alt="${esc(p.nombre)}">
+  ${p.fotos.length>1?`<button class="nav l" data-nav="-1" aria-label="Anterior">${ICO.l}</button><button class="nav r" data-nav="1" aria-label="Siguiente">${ICO.r}</button>`:""}</div>
+  <div class="thumbs">${p.fotos.map((f,i)=>`<img src="img/g/${f}" data-i="${i}" class="${i?"":"on"}" alt="">`).join("")}</div></div>
+ <div class="info"><div class="crumb">${esc(colName[p.col])}</div><h2>${esc(p.nombre)}</h2>${precioHTML(p)}
+  <p>${esc(p.desc)}</p>
+  ${p.tags.length||p.armado?`<div class="feat">${p.tags.map(t=>`<span>${esc(t)}</span>`).join("")}${p.armado?"<span>Incluye fotos de armado</span>":""}</div>`:""}
+  <div class="ask"><b>Medidas, colores, telas y tiempos de entrega:</b> un asesor te los confirma por WhatsApp según tu espacio.</div>
+  <a class="btn-wa" href="${wa(`Hola, vi ${p.nombre} en la tienda en línea de ${DATA.marca} y quisiera más información.`)}" target="_blank" rel="noopener">${ICO.wa}Pedir por WhatsApp</a>
+  <button class="btn-line${inL?" in":""}" data-addm="${p.id}">${inL?"✓ En tu lista":"Agregar a mi lista"}</button></div>
+ ${rel.length?`<div class="rel"><h4>También te puede gustar</h4><div class="row">${rel.map(r=>`<div class="mini" data-rel="${r.id}"><img src="img/g/${r.fotos[0]}" alt="" loading="lazy"><span>${esc(r.nombre)}</span></div>`).join("")}</div></div>`:""}`;
+ $("#sheet").scrollTop=0;$("#modal").classList.add("on");$("#ov").classList.add("on");document.body.style.overflow="hidden";
+ history.replaceState(null,"","#"+id)}
+function ver(i){idx=(i+cur.fotos.length)%cur.fotos.length;$("#big").src="img/f/"+cur.fotos[idx];
+ document.querySelectorAll(".thumbs img").forEach((t,k)=>t.classList.toggle("on",k===idx))}
+function cerrar(){$("#modal").classList.remove("on");$("#ov").classList.remove("on");document.body.style.overflow="";cur=null;
+ if(location.hash)history.replaceState(null,"",location.pathname)}
+$("#sheet").onclick=e=>{const t=e.target;
+ if(t.closest("[data-x]"))return cerrar();
+ const n=t.closest("[data-nav]");if(n)return ver(idx+ +n.dataset.nav);
+ if(t.dataset.i)return ver(+t.dataset.i);
+ const a=t.closest("[data-addm]");if(a)return toggle(a.dataset.addm);
+ const r=t.closest("[data-rel]");if(r)return abrir(r.dataset.rel);
+ if(t.id==="big"){const z=$("#zoom");z.querySelector("img").src=t.src;z.classList.add("on")}};
+$("#modal").onclick=e=>{if(e.target.id==="modal")cerrar()};
+$("#ov").onclick=()=>{cerrar();closeDrawer()};
+$("#zoom").onclick=()=>$("#zoom").classList.remove("on");
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){if($("#zoom").classList.contains("on"))$("#zoom").classList.remove("on");else{cerrar();closeDrawer()}}
+ if(cur&&e.key==="ArrowRight")ver(idx+1);if(cur&&e.key==="ArrowLeft")ver(idx-1)});
+
+// ---------- Inicio ----------
+setCol("todo");sync();
+if(location.hash&&byId[location.hash.slice(1)])abrir(location.hash.slice(1));
+</script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+{
+  "brand": "Muebles Demo",
+  "initial": "D",
+  "short": "DEMO",
+  "tagline": "Salas, cómodas, mesas y sillas de estilo clásico. Precios, medidas, colores y envíos te los confirma un asesor por WhatsApp.",
+  "about": "Muebles clásicos para el hogar. Elige tus favoritos, agrégalos a tu lista y cotízalos por WhatsApp con un asesor.",
+  "whatsapp": "573000000000",
+  "whatsappDisplay": "+57 300 000 0000",
+  "hero": "banca-celeste-1",
+  "storeKey": "muebles-demo-lista",
+  "socials": {
+    "instagram": { "text": "@mueblesdemo", "url": "https://example.com/instagram" },
+    "facebook": { "text": "Muebles Demo", "url": "https://example.com/facebook" },
+    "ubicacion": { "text": "Ver ubicación", "url": "https://example.com/ubicacion" },
+    "linktree": { "text": "Todas nuestras redes", "url": "https://example.com/links" }
+  },
+  "prices": {},
+  "collections": [
+    { "id": "salas", "name": "Salas", "chips": [["Sofás y bancas", "sof|banca"], ["Sillones", "sill"], ["Tapiz floral", "floral|bordad"]] },
+    { "id": "comodas", "name": "Cómodas", "chips": [["Con mármol", "mármol"], ["Lacadas", "lacad"]] },
+    { "id": "mesas", "name": "Mesas y sillas", "chips": [["Mesas", "mesa|escritorio"], ["Sillas", "silla"]] }
+  ],
+  "products": [
+    { "id": "sofa-imperial", "name": "Sofá Imperial", "collection": "salas", "description": "Sofá tallado en madera con tapizado en seda estampada.", "photos": 3 },
+    { "id": "banca-celeste", "name": "Banca Celeste", "collection": "salas", "description": "Banca de dos puestos con estructura dorada y tapiz celeste.", "photos": 3 },
+    { "id": "sillon-versalles", "name": "Sillón Versalles", "collection": "salas", "description": "Sillón con respaldo medallón y tapiz bordado.", "photos": 3 },
+    { "id": "sillon-borgona", "name": "Sillón Borgoña", "collection": "salas", "description": "Sillón con talla dorada y terciopelo borgoña.", "photos": 3, "badge": "Más vendido" },
+    { "id": "sillon-tapiz", "name": "Sillón Tapiz", "collection": "salas", "description": "Sillón con tapiz floral y patas curvas talladas.", "photos": 3 },
+    { "id": "comoda-marquesa", "name": "Cómoda Marquesa", "collection": "comodas", "description": "Cómoda con cubierta de mármol y apliques en bronce.", "photos": 3 },
+    { "id": "comoda-oriente", "name": "Cómoda Oriente", "collection": "comodas", "description": "Cómoda lacada con paneles decorados y cubierta de mármol.", "photos": 3 },
+    { "id": "mesa-taracea", "name": "Mesa Taracea", "collection": "mesas", "description": "Mesa auxiliar con incrustaciones de madera.", "photos": 3 },
+    { "id": "escritorio-rosal", "name": "Escritorio Rosal", "collection": "mesas", "description": "Escritorio con marquetería floral y detalles en bronce.", "photos": 3, "badge": "Nuevo" },
+    { "id": "silla-colonial", "name": "Silla Colonial", "collection": "mesas", "description": "Silla de comedor en nogal con asiento tapizado.", "photos": 3 }
+  ]
+}
